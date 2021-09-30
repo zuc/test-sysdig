@@ -3,7 +3,7 @@ on:
   - pull_request
   - issues
 
-# jobs:
+# jobs: 
 #   postWelcomeMessage:
 #     name: Post welcome message
 #     runs-on: ubuntu-latest
