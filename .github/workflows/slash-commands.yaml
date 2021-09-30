@@ -15,7 +15,7 @@ jobs:
           command: dig
           reaction: false
           allow-edits: true
-      - uses: jdvr/action-add-comment@master
+      - uses: jdvr/action-add-comment@main
         with:
           comment: 'Digging deeper... ![Diglett](https://icon2.cleanpng.com/20190210/osp/kisspng-diglett-dugtrio-alola-image-portable-network-graph-diglett-pokdex-the-official-pokmon-website-in-5c605f634d3fc7.2905606615498197473164.jpg)'
         env:
