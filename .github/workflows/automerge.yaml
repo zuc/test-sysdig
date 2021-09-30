@@ -24,7 +24,7 @@ jobs:
         uses: pascalgn/automerge-action@v0.14.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MERGE_LABELS: lgtm,!do-not-merge/wip,!do-not-merge/hold
+          MERGE_LABELS: lgtm,!do-not-merge/WIP,!do-not-merge/HOLD
           #MERGE_REMOVE_LABELS: "automerge"
           MERGE_METHOD: rebase
           #MERGE_COMMIT_MESSAGE: pull-request-description

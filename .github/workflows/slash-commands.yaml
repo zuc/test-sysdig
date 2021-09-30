@@ -1,0 +1,48 @@
+name: slash-commands
+
+on: [issue_comment]
+
+jobs:
+  dig:
+    name: Dig
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for Command
+        id: command
+        uses: xt0rted/slash-command-action@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          command: dig
+          reaction: false
+          allow-edits: true
+      - uses: jdvr/action-add-comment@master
+        with:
+          comment: 'Digging deeper... ![Diglett](https://icon2.cleanpng.com/20190210/osp/kisspng-diglett-dugtrio-alola-image-portable-network-graph-diglett-pokdex-the-official-pokmon-website-in-5c605f634d3fc7.2905606615498197473164.jpg)'
+        env:
+          # BUILD_NUMBER: 1234
+          GITHUB_TOKEN: {{ secrets.GITHUB_TOKEN }}
+
+  hold:
+    name: Hold
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for Command
+        id: command
+        uses: xt0rted/slash-command-action@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          command: hold
+          reaction: false
+          allow-edits: true
+      - if: ${{ steps.command.outputs.command-name == 'hold' && steps.command.outputs.command-arguments != 'cancel' }}
+        uses: buildsville/add-remove-label@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          label: do-not-merge/hold
+          type: add
+      - if: ${{ steps.command.outputs.command-name == 'hold' && steps.command.outputs.command-arguments == 'cancel' }}
+        uses: buildsville/add-remove-label@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          label: do-not-merge/hold
+          type: remove
