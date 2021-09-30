@@ -5,18 +5,17 @@ on:
       - labeled
       - unlabeled
       - synchronize
-      - opened
       - edited
-      - ready_for_review
       - reopened
       - unlocked
-  pull_request_review:
-    types:
-      - submitted
   check_suite:
     types:
       - completed
   status: {}
+  workflow_run:
+    workflows: ["LGTM"]
+    types: 
+      - completed
 jobs:
   automerge:
     runs-on: ubuntu-latest
