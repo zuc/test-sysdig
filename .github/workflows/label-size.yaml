@@ -3,24 +3,21 @@ name: label-size
 on: [pull_request]
 
 jobs:
-  labeler:
+  label-size:
     runs-on: ubuntu-latest
     name: Label the PR size
     steps:
-      - uses: codelytv/pr-size-labeler@v1
+      - name: size-label
+        uses: "pascalgn/size-label-action@v0.4.2"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          xs_label: 'size/xs'
-          xs_max_size: '10'
-          s_label: 'size/s'
-          s_max_size: '100'
-          m_label: 'size/m'
-          m_max_size: '500'
-          l_label: 'size/l'
-          l_max_size: '1000'
-          xl_label: 'size/xl'
-          fail_if_xl: 'false'
-          message_if_xl: >
-            'This PR exceeds the recommended size of 1000 lines.
-            Please make sure you are NOT addressing multiple issues with one PR.
-            Note this PR might be rejected due to its size.’
+          sizes: >
+            {
+              "0": "size/XS",
+              "10": "size/S",
+              "30": "size/M",
+              "100": "size/L",
+              "300": "size/XL",
+              "1000": "size/XXL"
+            }
